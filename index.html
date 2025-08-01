@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publica Tus Productos | Promoción Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --primary-light: #34D399;
+            --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --light-bg: #F9FAFB;
+            --white: #FFFFFF;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --blur: blur(10px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(52, 211, 153, 0.05) 0%, rgba(52, 211, 153, 0) 30%),
+                        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0) 30%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .logo i {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 120px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .hero-blur {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-light), transparent 70%);
+            filter: var(--blur);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .blur-1 {
+            top: -150px;
+            right: -150px;
+        }
+
+        .blur-2 {
+            bottom: -200px;
+            left: -150px;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            padding: 50px 0 100px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 100px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .price-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+            display: inline-block;
+        }
+
+        .price-details {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        /* Subscription Plans */
+        .plans-section {
+            padding: 50px 0 100px;
+        }
+
+        .plans-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .plan-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 300px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .plan-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .plan-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 15px 0;
+        }
+
+        .plan-duration {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 25px 0;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .plan-features li {
+            margin-bottom: 10px;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .plan-features li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 20px;
+            margin-left: -20px;
+        }
+
+        .plan-btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .plan-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* WhatsApp Section */
+        .whatsapp-section {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .whatsapp-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #25D366;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.5rem;
+        }
+
+        .phone-number {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 15px 0;
+            color: var(--primary-dark);
+        }
+
+        .message-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .message-box p {
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .pricing, .whatsapp-card {
+                padding: 30px 20px;
+            }
+            
+            .price-tag {
+                font-size: 3rem;
+            }
+            
+            .plans-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .plan-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>cubamark</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-blur blur-1"></div>
+        <div class="hero-blur blur-2"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Impulsa tus ventas con nuestra plataforma digital</h1>
+                <p>Publica tus productos en nuestro sitio web moderno y llega a miles de clientes potenciales. Elige entre nuestros planes flexibles o publica productos individuales.</p>
+                <a href="#contact" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    Contactar al CEO
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <div class="container">
+            <h2 class="section-title">Cómo Funciona</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <h3>Contacta por WhatsApp</h3>
+                    <p>Envía un mensaje al CEO de cubamark por WhatsApp expresando tu interés en publicar tus productos.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3>Proporciona información</h3>
+                    <p>Comparte los detalles de tus productos: fotos, descripción, precio y cualquier información relevante.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Publicación inmediata</h3>
+                    <p>Tras confirmar el pago, tus productos serán publicados en nuestra plataforma con diseño profesional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Plans Section -->
+    <section class="plans-section">
+        <div class="container">
+            <h2 class="section-title">Planes de Suscripción</h2>
+            <div class="plans-container">
+                <!-- Plan 1 -->
+                <div class="plan-card">
+                    <h3 class="plan-name">Plan Básico</h3>
+                    <div class="plan-price">500 CUP</div>
+                    <div class="plan-duration">3 meses de visibilidad</div>
+                    <ul class="plan-features">
+                        <li>Publicación de hasta 30 productos</li>
+                        <li>Diseño profesional para cada producto</li>
+                        <li>Actualizaciones mensuales</li>
+                        <li>Soporte básico por WhatsApp</li>
+                    </ul>
+                    <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Básico%20de%20500%20CUP%20por%203%20meses.%20Por%20favor%20indícame%20los%20pasos%20para%20suscribirme.%20Gracias." class="plan-btn" target="_blank">Seleccionar</a>
+                </div>
+                
+                <!-- Plan 2 -->
+                <div class="plan-card">
+                    <h3 class="plan-name">Plan Intermedio</h3>
+                    <div class="plan-price">1500 CUP</div>
+                    <div class="plan-duration">6 meses de visibilidad</div>
+                    <ul class="plan-features">
+                        <li>Publicación de hasta 60 productos</li>
+                        <li>Diseño profesional premium</li>
+                        <li>Actualizaciones semanales</li>
+                        <li>Soporte prioritario</li>
+                        <li>Destacado en la página principal</li>
+                    </ul>
+                    <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Intermedio%20de%201500%20CUP%20por%206%20meses.%20Por%20favor%20indícame%20los%20pasos%20para%20suscribirme.%20Gracias." class="plan-btn" target="_blank">Seleccionar</a>
+                </div>
+                
+                <!-- Plan 3 -->
+                <div class="plan-card">
+                    <h3 class="plan-name">Plan Premium</h3>
+                    <div class="plan-price">3000 CUP</div>
+                    <div class="plan-duration">1 año de visibilidad</div>
+                    <ul class="plan-features">
+                        <li>Publicación ilimitada de productos</li>
+                        <li>Diseño profesional premium</li>
+                        <li>Actualizaciones en tiempo real</li>
+                        <li>Soporte VIP 24/7</li>
+                        <li>Posicionamiento destacado</li>
+                        <li>Inclusión en campañas promocionales</li>
+                    </ul>
+                    <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Premium%20de%203000%20CUP%20por%201%20año.%20Por%20favor%20indícame%20los%20pasos%20para%20suscribirme.%20Gracias." class="plan-btn" target="_blank">Seleccionar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section>
+        <div class="container">
+            <div class="pricing">
+                <h2 class="section-title">Publicación Individual</h2>
+                <div class="price-tag">10 CUP</div>
+                <p class="price-details">Por cada producto publicado en nuestra plataforma</p>
+                <p>Ideal si quieres probar el servicio o tienes pocos productos para promocionar.</p>
+                <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20la%20publicación%20individual%20de%20productos%20a%2010%20CUP%20cada%20uno.%20Por%20favor%20indícame%20los%20pasos%20a%20seguir.%20Gracias." class="plan-btn" style="margin-top: 20px;" target="_blank">Seleccionar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Section -->
+    <section class="whatsapp-section" id="contact">
+        <div class="container">
+            <div class="whatsapp-card">
+                <h2 class="section-title">¡Empieza Hoy Mismo!</h2>
+                <p>Contacta directamente al CEO de cubamark  por WhatsApp para publicar tus productos o suscribirte a nuestros planes:</p>
+                
+                <span class="phone-number">
+                    <i class="fab fa-whatsapp"></i> +53 63868677
+                </span>
+                
+                <div class="message-box">
+                    <p>"Hola, estoy interesado en publicar mis productos en cubamark. Me gustaría información sobre [menciona el plan que te interesa o 'publicación individual']. Por favor indíqueme los pasos a seguir. Gracias."</p>
+                </div>
+                
+                <p>Usa este mensaje predefinido o personalízalo según tus necesidades.</p>
+                
+                <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20publicar%20mis%20productos%20en%20MarketPromo.%20Me%20gustaría%20información%20sobre%20[plan%20o%20publicación%20individual].%20Por%20favor%20indíqueme%20los%20pasos%20a%20seguir.%20Gracias." class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    Enviar Mensaje por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="color: white; justify-content: center;">
+                    <i class="fas fa-store"></i>
+                    <span>cubamark</span>
+                </div>
+                <p>La plataforma líder para promoción de productos en Cuba</p>
+                <div class="copyright">
+                    &copy; 2025 cubamark. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Efecto de desplazamiento suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Efecto de aparición para las tarjetas
+        const cards = document.querySelectorAll('.card, .plan-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        cards.forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
