@@ -2,1689 +2,691 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Admin - TecnoShop</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publica Tus Productos | Promoción Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --primary-light: #34D399;
+            --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --light-bg: #F9FAFB;
+            --white: #FFFFFF;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --blur: blur(10px);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
         }
 
         body {
-            background-color: #f5f5f5;
-            color: #333;
-            min-height: 100vh;
-        }
-
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #1a237e;
-            padding: 20px;
-        }
-
-        .login-form {
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-form h2 {
-            color: #1a237e;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.5rem;
-        }
-
-        .login-form input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .login-form button {
-            width: 100%;
-            padding: 12px;
-            background-color: #1a237e;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .login-form button:hover {
-            background-color: #303f9f;
-        }
-
-        .error-message {
-            color: #f44336;
-            margin-top: 10px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .admin-container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 15px;
-        }
-
-        .admin-container header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .admin-container h1 {
-            color: #1a237e;
-            font-size: 1.5rem;
-        }
-
-        #logout-btn {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .admin-nav {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-            overflow-x: auto;
-        }
-
-        .admin-nav button {
-            padding: 10px 15px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            color: #555;
-            border-bottom: 2px solid transparent;
-            white-space: nowrap;
-        }
-
-        .admin-nav button.active {
-            color: #1a237e;
-            border-bottom: 2px solid #1a237e;
-            font-weight: 500;
-        }
-
-        .admin-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .admin-content {
-                display: grid;
-                grid-template-columns: 1fr 2fr;
-                gap: 30px;
-            }
-        }
-
-        .admin-form {
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .admin-form h2 {
-            color: #1a237e;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-            color: #555;
-            font-size: 0.9rem;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-row {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        @media (min-width: 480px) {
-            .form-row {
-                flex-direction: row;
-            }
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        #add-product-btn, #update-product-btn,
-        #add-category-btn, #update-category-btn,
-        #add-banner-btn, #update-banner-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #1a237e;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        #update-product-btn, #update-category-btn,
-        #update-banner-btn {
-            background-color: #4CAF50;
-            display: none;
-        }
-
-        #cancel-edit-btn, #cancel-category-edit-btn,
-        #cancel-banner-edit-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #f44336;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .products-list, .categories-list,
-        .banners-list {
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .products-list h2, .categories-list h2,
-        .banners-list h2 {
-            color: #1a237e;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-
-        .search-bar {
-            margin-bottom: 15px;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        .product-item, .category-item,
-        .banner-item {
-            display: flex;
-            flex-direction: column;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-            gap: 10px;
-        }
-
-        @media (min-width: 600px) {
-            .product-item, .category-item,
-            .banner-item {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-        }
-
-        .product-item:last-child, .category-item:last-child,
-        .banner-item:last-child {
-            border-bottom: none;
-        }
-
-        .product-info h3, .category-info h3,
-        .banner-info h3 {
-            color: #1a237e;
-            margin-bottom: 5px;
-            font-size: 1rem;
-        }
-
-        .product-info p, .category-info p,
-        .banner-info p {
-            color: #666;
-            font-size: 0.85rem;
-        }
-
-        .product-actions, .category-actions,
-        .banner-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        @media (min-width: 600px) {
-            .product-actions, .category-actions,
-            .banner-actions {
-                margin-top: 0;
-            }
-        }
-
-        .edit-btn, .delete-btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-
-        .edit-btn {
-            background-color: #2196F3;
-            color: white;
-        }
-
-        .delete-btn {
-            background-color: #f44336;
-            color: white;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-        }
-
-        .image-preview-container {
-            margin-top: 10px;
-        }
-
-        .image-preview {
-            max-width: 100%;
-            height: auto;
-            max-height: 200px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            display: none;
-        }
-
-        .url-status {
-            margin-top: 5px;
-            font-size: 0.8rem;
-        }
-
-        .valid-url {
-            color: #4CAF50;
-        }
-
-        .invalid-url {
-            color: #f44336;
-        }
-
-        .content-tab {
-            display: none;
-        }
-
-        .content-tab.active {
-            display: block;
-        }
-
-        .whatsapp-link {
-            color: #25D366;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .whatsapp-link:hover {
-            text-decoration: underline;
-        }
-
-        .whatsapp-input-container {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
             position: relative;
         }
 
-        .whatsapp-input-container::before {
-            content: "+";
+        body::before {
+            content: "";
             position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #555;
-            font-weight: bold;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(52, 211, 153, 0.05) 0%, rgba(52, 211, 153, 0) 30%),
+                        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0) 30%);
+            z-index: -1;
         }
 
-        .whatsapp-input {
-            padding-left: 20px !important;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .whatsapp-status {
-            margin-top: 5px;
-            font-size: 0.8rem;
+        /* Header */
+        header {
+            padding: 30px 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .valid-whatsapp {
-            color: #4CAF50;
-        }
-
-        .invalid-whatsapp {
-            color: #f44336;
-        }
-
-        .all-provinces-checkbox {
-            margin-top: 10px;
+        .logo {
             display: flex;
             align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark);
         }
 
-        .all-provinces-checkbox input {
-            width: auto;
-            margin-right: 8px;
+        .logo i {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        .sizes-container {
-            margin-top: 10px;
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 120px;
+            text-align: center;
+            position: relative;
         }
 
-        .size-item {
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .hero-blur {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-light), transparent 70%);
+            filter: var(--blur);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .blur-1 {
+            top: -150px;
+            right: -150px;
+        }
+
+        .blur-2 {
+            bottom: -200px;
+            left: -150px;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            padding: 50px 0 100px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .cards {
             display: flex;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 100px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .price-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+            display: inline-block;
+        }
+
+        .price-details {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        /* Subscription Plans */
+        .plans-section {
+            padding: 50px 0 100px;
+        }
+
+        .plans-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .plan-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 300px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .plan-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .plan-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 15px 0;
+        }
+
+        .plan-duration {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 25px 0;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .plan-features li {
             margin-bottom: 10px;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .plan-features li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 20px;
+            margin-left: -20px;
+        }
+
+        .plan-btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .plan-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* WhatsApp Section */
+        .whatsapp-section {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .whatsapp-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
             align-items: center;
-        }
-
-        .size-item input {
-            flex: 1;
-        }
-
-        .size-item button {
-            background-color: #f44336;
+            gap: 12px;
+            background: #25D366;
             color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: 500;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
         }
 
-        #add-size-btn {
-            background-color: #1a237e;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 12px;
-            cursor: pointer;
-            margin-top: 5px;
+        .whatsapp-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.5rem;
+        }
+
+        .phone-number {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 15px 0;
+            color: var(--primary-dark);
+        }
+
+        .message-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .message-box p {
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .pricing, .whatsapp-card {
+                padding: 30px 20px;
+            }
+            
+            .price-tag {
+                font-size: 3rem;
+            }
+            
+            .plans-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .plan-card {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="admin-container" id="admin-container">
-        <header>
-            <h1>Panel de Administración TecnoShop</h1>
-            <button id="logout-btn">Cerrar Sesión</button>
-        </header>
-
-        <div class="admin-nav">
-            <button class="active" data-tab="products-tab">Productos</button>
-            <button data-tab="categories-tab">Categorías</button>
-            <button data-tab="banners-tab">Banners</button>
-        </div>
-
-        <div class="content-tab active" id="products-tab">
-            <div class="admin-content">
-                <div class="admin-form">
-                    <h2 id="form-title">Agregar Nuevo Producto</h2>
-                    <div class="form-group">
-                        <label for="product-name">Nombre del Producto</label>
-                        <input type="text" id="product-name" placeholder="Ej. Teclado Gamer RGB">
-                    </div>
-                    <div class="form-group">
-                        <label for="product-brand">Marca</label>
-                        <input type="text" id="product-brand" placeholder="Ej. Redragon">
-                    </div>
-                    <div class="form-group">
-                        <label for="product-description">Descripción (una por línea)</label>
-                        <textarea id="product-description" rows="4" placeholder="Características del producto..."></textarea>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="product-price">Precio (CUP)</label>
-                            <input type="number" id="product-price" placeholder="Ej. 199.90" step="0.01">
-                        </div>
-                        <div class="form-group">
-                            <label for="product-old-price">Precio Anterior (opcional)</label>
-                            <input type="number" id="product-old-price" placeholder="Ej. 249.90" step="0.01">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="product-category">Categoría</label>
-                            <select id="product-category">
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="product-stock">Stock</label>
-                            <input type="number" id="product-stock" placeholder="Ej. 10" value="1">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-province">Provincia</label>
-                        <select id="product-province">
-                            <option value="Todas las provincias">Todas las provincias</option>
-                            <option value="Pinar del Río">Pinar del Río</option>
-                            <option value="Artemisa">Artemisa</option>
-                            <option value="La Habana">La Habana</option>
-                            <option value="Mayabeque">Mayabeque</option>
-                            <option value="Matanzas">Matanzas</option>
-                            <option value="Cienfuegos">Cienfuegos</option>
-                            <option value="Villa Clara">Villa Clara</option>
-                            <option value="Sancti Spíritus">Sancti Spíritus</option>
-                            <option value="Ciego de Ávila" selected>Ciego de Ávila</option>
-                            <option value="Camagüey">Camagüey</option>
-                            <option value="Las Tunas">Las Tunas</option>
-                            <option value="Holguín">Holguín</option>
-                            <option value="Granma">Granma</option>
-                            <option value="Santiago de Cuba">Santiago de Cuba</option>
-                            <option value="Guantánamo">Guantánamo</option>
-                            <option value="Isla de la Juventud">Isla de la Juventud</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-image-url">URL de la Imagen del Producto</label>
-                        <input type="url" id="product-image-url" placeholder="Ej. https://ejemplo.com/imagen.jpg">
-                        <div id="url-status" class="url-status"></div>
-                        <div class="image-preview-container">
-                            <img id="image-preview" class="image-preview" src="#" alt="Vista previa de la imagen">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-whatsapp">Número de WhatsApp del Vendedor (opcional)</label>
-                        <div class="whatsapp-input-container">
-                            <input type="text" id="product-whatsapp" class="whatsapp-input" placeholder="5351234567" maxlength="15">
-                        </div>
-                        <small>Ingrese solo el número (ej. 5351234567), se agregará el código de país (+53) automáticamente</small>
-                        <div id="whatsapp-status" class="whatsapp-status"></div>
-                    </div>
-                    <div class="form-group">
-                        <label>Tallas/Modelos Disponibles</label>
-                        <div class="sizes-container" id="sizes-container">
-                        </div>
-                        <button type="button" id="add-size-btn">Agregar Talla/Modelo</button>
-                    </div>
-                    <button id="add-product-btn">Agregar Producto</button>
-                    <button id="update-product-btn">Actualizar Producto</button>
-                    <button id="cancel-edit-btn">Cancelar Edición</button>
-                    <input type="hidden" id="editing-product-id">
-                </div>
-
-                <div class="products-list">
-                    <h2>Productos Existentes</h2>
-                    <div class="search-bar">
-                        <input type="text" id="search-products" placeholder="Buscar productos...">
-                    </div>
-                    <div id="admin-products-list">
-                        <div class="loading">Cargando productos...</div>
-                    </div>
-                </div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>cubamark</span>
             </div>
         </div>
+    </header>
 
-        <div class="content-tab" id="categories-tab">
-            <div class="admin-content">
-                <div class="admin-form">
-                    <h2 id="category-form-title">Agregar Nueva Categoría</h2>
-                    <div class="form-group">
-                        <label for="category-name">Nombre de la Categoría</label>
-                        <input type="text" id="category-name" placeholder="Ej. Teclados Gamer">
-                    </div>
-                    <div class="form-group">
-                        <label for="category-icon">Ícono (Clase FontAwesome)</label>
-                        <input type="text" id="category-icon" placeholder="Ej. fa-keyboard">
-                        <small>Usar nombres de íconos de <a href="https://fontawesome.com/icons" target="_blank">FontAwesome</a></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="category-image-url">URL de la Imagen (opcional)</label>
-                        <input type="url" id="category-image-url" placeholder="Ej. https://ejemplo.com/imagen-categoria.jpg">
-                        <div id="category-url-status" class="url-status"></div>
-                        <div class="image-preview-container">
-                            <img id="category-image-preview" class="image-preview" src="#" alt="Vista previa de la imagen">
-                        </div>
-                    </div>
-                    <button id="add-category-btn">Agregar Categoría</button>
-                    <button id="update-category-btn">Actualizar Categoría</button>
-                    <button id="cancel-category-edit-btn">Cancelar Edición</button>
-                    <input type="hidden" id="editing-category-id">
-                </div>
-
-                <div class="categories-list">
-                    <h2>Categorías Existentes</h2>
-                    <div class="search-bar">
-                        <input type="text" id="search-categories" placeholder="Buscar categorías...">
-                    </div>
-                    <div id="admin-categories-list">
-                        <div class="loading">Cargando categorías...</div>
-                    </div>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-blur blur-1"></div>
+        <div class="hero-blur blur-2"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Impulsa tus ventas con nuestra plataforma digital</h1>
+                <p>Publica tus productos en nuestro sitio web moderno y llega a miles de clientes potenciales. Elige entre nuestros planes flexibles o publica productos individuales.</p>
+                <a href="#contact" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    Contactar al CEO
+                </a>
             </div>
         </div>
+    </section>
 
-        <div class="content-tab" id="banners-tab">
-            <div class="admin-content">
-                <div class="admin-form">
-                    <h2 id="banner-form-title">Agregar Nuevo Banner</h2>
-                    <div class="form-group">
-                        <label for="banner-image-url">URL de la Imagen del Banner</label>
-                        <input type="url" id="banner-image-url" placeholder="Ej. https://ejemplo.com/banner.jpg">
-                        <div id="banner-url-status" class="url-status"></div>
-                        <div class="image-preview-container">
-                            <img id="banner-image-preview" class="image-preview" src="#" alt="Vista previa del banner">
-                        </div>
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <div class="container">
+            <h2 class="section-title">Cómo Funciona</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-comment-alt"></i>
                     </div>
-                    <div class="form-group">
-                        <label for="banner-link">Enlace (opcional)</label>
-                        <input type="url" id="banner-link" placeholder="Ej. https://ejemplo.com/producto">
-                    </div>
-                    <div class="form-group">
-                        <label for="banner-active">Activo</label>
-                        <select id="banner-active">
-                            <option value="true">Sí</option>
-                            <option value="false">No</option>
-                        </select>
-                    </div>
-                    <button id="add-banner-btn">Agregar Banner</button>
-                    <button id="update-banner-btn">Actualizar Banner</button>
-                    <button id="cancel-banner-edit-btn">Cancelar Edición</button>
-                    <input type="hidden" id="editing-banner-id">
+                    <h3>Contacta por WhatsApp</h3>
+                    <p>Envía un mensaje al CEO de cubamark por WhatsApp expresando tu interés en publicar tus productos.</p>
                 </div>
-
-                <div class="banners-list">
-                    <h2>Banners Existentes</h2>
-                    <div class="search-bar">
-                        <input type="text" id="search-banners" placeholder="Buscar banners...">
-                    </div>
-                    <div id="admin-banners-list">
-                        <div class="loading">Cargando banners...</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyAH23m01o_Eg4Cuf9NSykHRBxu7CvQo_vc",
-            authDomain: "cuba-arn.firebaseapp.com",
-            databaseURL: "https://tiene-a-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "cuba-arn",
-            storageBucket: "cuba-arn.firebasestorage.app",
-            messagingSenderId: "607371019723",
-            appId: "1:607371019723:web:3116df3d83c20513bc224e",
-            measurementId: "G-C6FBKGH58C"
-        };
-        
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
-        const storage = firebase.storage();
-        
-        const adminContainer = document.getElementById('admin-container');
-        const addProductBtn = document.getElementById('add-product-btn');
-        const updateProductBtn = document.getElementById('update-product-btn');
-        const cancelEditBtn = document.getElementById('cancel-edit-btn');
-        const adminProductsList = document.getElementById('admin-products-list');
-        const searchProductsInput = document.getElementById('search-products');
-        const productImageUrl = document.getElementById('product-image-url');
-        const imagePreview = document.getElementById('image-preview');
-        const urlStatus = document.getElementById('url-status');
-        const formTitle = document.getElementById('form-title');
-        const editingProductId = document.getElementById('editing-product-id');
-        const productCategorySelect = document.getElementById('product-category');
-        const productProvinceSelect = document.getElementById('product-province');
-        const productWhatsappInput = document.getElementById('product-whatsapp');
-        const whatsappStatus = document.getElementById('whatsapp-status');
-        const sizesContainer = document.getElementById('sizes-container');
-        const addSizeBtn = document.getElementById('add-size-btn');
-        
-        const addCategoryBtn = document.getElementById('add-category-btn');
-        const updateCategoryBtn = document.getElementById('update-category-btn');
-        const cancelCategoryEditBtn = document.getElementById('cancel-category-edit-btn');
-        const adminCategoriesList = document.getElementById('admin-categories-list');
-        const searchCategoriesInput = document.getElementById('search-categories');
-        const categoryNameInput = document.getElementById('category-name');
-        const categoryIconInput = document.getElementById('category-icon');
-        const categoryImageUrl = document.getElementById('category-image-url');
-        const categoryImagePreview = document.getElementById('category-image-preview');
-        const categoryUrlStatus = document.getElementById('category-url-status');
-        const categoryFormTitle = document.getElementById('category-form-title');
-        const editingCategoryId = document.getElementById('editing-category-id');
-        
-        const addBannerBtn = document.getElementById('add-banner-btn');
-        const updateBannerBtn = document.getElementById('update-banner-btn');
-        const cancelBannerEditBtn = document.getElementById('cancel-banner-edit-btn');
-        const adminBannersList = document.getElementById('admin-banners-list');
-        const searchBannersInput = document.getElementById('search-banners');
-        const bannerImageUrl = document.getElementById('banner-image-url');
-        const bannerImagePreview = document.getElementById('banner-image-preview');
-        const bannerUrlStatus = document.getElementById('banner-url-status');
-        const bannerFormTitle = document.getElementById('banner-form-title');
-        const editingBannerId = document.getElementById('editing-banner-id');
-        const bannerLinkInput = document.getElementById('banner-link');
-        const bannerActiveSelect = document.getElementById('banner-active');
-        
-        let categories = [];
-        let banners = [];
-        
-        function validateWhatsappNumber() {
-            const whatsappNumber = productWhatsappInput.value.trim();
-            
-            if (whatsappNumber === '') {
-                whatsappStatus.textContent = '';
-                whatsappStatus.className = 'whatsapp-status';
-                return;
-            }
-            
-            const whatsappRegex = /^[1-9][0-9]{7,8}$/;
-            
-            if (whatsappRegex.test(whatsappNumber)) {
-                whatsappStatus.textContent = 'Número válido';
-                whatsappStatus.className = 'whatsapp-status valid-whatsapp';
-            } else {
-                whatsappStatus.textContent = 'Número no válido (debe tener 8 o 9 dígitos, sin el +53)';
-                whatsappStatus.className = 'whatsapp-status invalid-whatsapp';
-            }
-        }
-        
-        function addSizeField(size = '', stock = '') {
-            const sizeId = Date.now();
-            const sizeItem = document.createElement('div');
-            sizeItem.className = 'size-item';
-            sizeItem.dataset.id = sizeId;
-            
-            sizeItem.innerHTML = `
-                <input type="text" class="size-name" placeholder="Talla/Modelo" value="${size}">
-                <input type="number" class="size-stock" placeholder="Stock" value="${stock}" min="0">
-                <button type="button" class="remove-size-btn">Eliminar</button>
-            `;
-            
-            sizesContainer.appendChild(sizeItem);
-            
-            sizeItem.querySelector('.remove-size-btn').addEventListener('click', () => {
-                sizesContainer.removeChild(sizeItem);
-            });
-        }
-        
-        function getSizesData() {
-            const sizes = [];
-            const sizeItems = sizesContainer.querySelectorAll('.size-item');
-            
-            sizeItems.forEach(item => {
-                const name = item.querySelector('.size-name').value.trim();
-                const stock = parseInt(item.querySelector('.size-stock').value) || 0;
                 
-                if (name) {
-                    sizes.push({ name, stock });
-                }
-            });
-            
-            return sizes;
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            adminContainer.style.display = 'block';
-            
-            Promise.all([loadCategories(), loadBanners()])
-                .then(() => {
-                    loadProducts();
-                });
-        
-            addProductBtn.addEventListener('click', addProduct);
-            updateProductBtn.addEventListener('click', updateProduct);
-            cancelEditBtn.addEventListener('click', cancelEdit);
-            searchProductsInput.addEventListener('input', searchProducts);
-            productWhatsappInput.addEventListener('input', validateWhatsappNumber);
-            addSizeBtn.addEventListener('click', () => addSizeField());
-            
-            addCategoryBtn.addEventListener('click', addCategory);
-            updateCategoryBtn.addEventListener('click', updateCategory);
-            cancelCategoryEditBtn.addEventListener('click', cancelCategoryEdit);
-            searchCategoriesInput.addEventListener('input', searchCategories);
-            
-            addBannerBtn.addEventListener('click', addBanner);
-            updateBannerBtn.addEventListener('click', updateBanner);
-            cancelBannerEditBtn.addEventListener('click', cancelBannerEdit);
-            searchBannersInput.addEventListener('input', searchBanners);
-            
-            productImageUrl.addEventListener('input', validateImageUrl);
-            categoryImageUrl.addEventListener('input', validateCategoryImageUrl);
-            bannerImageUrl.addEventListener('input', validateBannerImageUrl);
-            
-            document.querySelectorAll('.admin-nav button').forEach(button => {
-                button.addEventListener('click', () => {
-                    document.querySelectorAll('.admin-nav button').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    button.classList.add('active');
-                    
-                    document.querySelectorAll('.content-tab').forEach(tab => {
-                        tab.classList.remove('active');
-                    });
-                    document.getElementById(button.dataset.tab).classList.add('active');
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3>Proporciona información</h3>
+                    <p>Comparte los detalles de tus productos: fotos, descripción, precio y cualquier información relevante.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Publicación inmediata</h3>
+                    <p>Tras confirmar el pago, tus productos serán publicados en nuestra plataforma con diseño profesional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Plans Section -->
+    <section class="plans-section">
+        <div class="container">
+            <h2 class="section-title">Planes de Suscripción</h2>
+            <div class="plans-container">
+                <!-- Plan 1 -->
+                <div class="plan-card">
+                    <h3 class="plan-name">Plan Básico</h3>
+                    <div class="plan-price">500 CUP</div>
+                    <div class="plan-duration">3 meses de visibilidad</div>
+                    <ul class="plan-features">
+                        <li>Publicación de hasta 30 productos</li>
+                        <li>Diseño profesional para cada producto</li>
+                        <li>Actualizaciones mensuales</li>
+                        <li>Soporte básico por WhatsApp</li>
+                    </ul>
+                    <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Básico%20de%20500%20CUP%20por%203%20meses.%20Por%20favor%20indícame%20los%20pasos%20para%20suscribirme.%20Gracias." class="plan-btn" target="_blank">Seleccionar</a>
+                </div>
+                
+                <!-- Plan 2 -->
+                <div class="plan-card">
+                    <h3 class="plan-name">Plan Intermedio</h3>
+                    <div class="plan-price">1500 CUP</div>
+                    <div class="plan-duration">6 meses de visibilidad</div>
+                    <ul class="plan-features">
+                        <li>Publicación de hasta 60 productos</li>
+                        <li>Diseño profesional premium</li>
+                        <li>Actualizaciones semanales</li>
+                        <li>Soporte prioritario</li>
+                        <li>Destacado en la página principal</li>
+                    </ul>
+                    <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Intermedio%20de%201500%20CUP%20por%206%20meses.%20Por%20favor%20indícame%20los%20pasos%20para%20suscribirme.%20Gracias." class="plan-btn" target="_blank">Seleccionar</a>
+                </div>
+                
+                <!-- Plan 3 -->
+                <div class="plan-card">
+                    <h3 class="plan-name">Plan Premium</h3>
+                    <div class="plan-price">3000 CUP</div>
+                    <div class="plan-duration">1 año de visibilidad</div>
+                    <ul class="plan-features">
+                        <li>Publicación ilimitada de productos</li>
+                        <li>Diseño profesional premium</li>
+                        <li>Actualizaciones en tiempo real</li>
+                        <li>Soporte VIP 24/7</li>
+                        <li>Posicionamiento destacado</li>
+                        <li>Inclusión en campañas promocionales</li>
+                    </ul>
+                    <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Premium%20de%203000%20CUP%20por%201%20año.%20Por%20favor%20indícame%20los%20pasos%20para%20suscribirme.%20Gracias." class="plan-btn" target="_blank">Seleccionar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section>
+        <div class="container">
+            <div class="pricing">
+                <h2 class="section-title">Publicación Individual</h2>
+                <div class="price-tag">10 CUP</div>
+                <p class="price-details">Por cada producto publicado en nuestra plataforma</p>
+                <p>Ideal si quieres probar el servicio o tienes pocos productos para promocionar.</p>
+                <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20la%20publicación%20individual%20de%20productos%20a%2010%20CUP%20cada%20uno.%20Por%20favor%20indícame%20los%20pasos%20a%20seguir.%20Gracias." class="plan-btn" style="margin-top: 20px;" target="_blank">Seleccionar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Section -->
+    <section class="whatsapp-section" id="contact">
+        <div class="container">
+            <div class="whatsapp-card">
+                <h2 class="section-title">¡Empieza Hoy Mismo!</h2>
+                <p>Contacta directamente al CEO de cubamark  por WhatsApp para publicar tus productos o suscribirte a nuestros planes:</p>
+                
+                <span class="phone-number">
+                    <i class="fab fa-whatsapp"></i> +53 63868677
+                </span>
+                
+                <div class="message-box">
+                    <p>"Hola, estoy interesado en publicar mis productos en cubamark. Me gustaría información sobre [menciona el plan que te interesa o 'publicación individual']. Por favor indíqueme los pasos a seguir. Gracias."</p>
+                </div>
+                
+                <p>Usa este mensaje predefinido o personalízalo según tus necesidades.</p>
+                
+                <a href="https://wa.me/5363868677?text=Hola,%20estoy%20interesado%20en%20publicar%20mis%20productos%20en%20MarketPromo.%20Me%20gustaría%20información%20sobre%20[plan%20o%20publicación%20individual].%20Por%20favor%20indíqueme%20los%20pasos%20a%20seguir.%20Gracias." class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    Enviar Mensaje por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="color: white; justify-content: center;">
+                    <i class="fas fa-store"></i>
+                    <span>cubamark</span>
+                </div>
+                <p>La plataforma líder para promoción de productos en Cuba</p>
+                <div class="copyright">
+                    &copy; 2025 cubamark. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Efecto de desplazamiento suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
         });
         
-        function loadBanners() {
-            return db.collection("banners").orderBy("createdAt", "desc").get()
-                .then(querySnapshot => {
-                    banners = [];
-                    adminBannersList.innerHTML = '<div class="loading">Cargando banners...</div>';
-                    
-                    if (querySnapshot.empty) {
-                        adminBannersList.innerHTML = '<div class="empty">No hay banners</div>';
-                        return [];
-                    }
-                    
-                    banners = [];
-                    adminBannersList.innerHTML = '';
-                    
-                    querySnapshot.forEach(doc => {
-                        const banner = { id: doc.id, ...doc.data() };
-                        banners.push(banner);
-                        addBannerToAdminList(banner);
-                    });
-                    
-                    return banners;
-                })
-                .catch(error => {
-                    console.error("Error al cargar banners:", error);
-                    adminBannersList.innerHTML = '<div class="error">Error al cargar banners</div>';
-                    return [];
-                });
-        }
-        
-        function addBannerToAdminList(banner) {
-            const bannerElement = document.createElement('div');
-            bannerElement.className = 'banner-item';
-            bannerElement.dataset.id = banner.id;
-            
-            bannerElement.innerHTML = `
-                <div class="banner-info">
-                    <h3>Banner ${banner.active ? '(Activo)' : '(Inactivo)'}</h3>
-                    ${banner.link ? `<p>Enlace: ${banner.link}</p>` : ''}
-                    <img src="${banner.image}" alt="Banner" style="max-width: 100%; max-height: 150px; margin-top: 10px;">
-                </div>
-                <div class="banner-actions">
-                    <button class="edit-btn" data-id="${banner.id}">Editar</button>
-                    <button class="delete-btn" data-id="${banner.id}">Eliminar</button>
-                </div>
-            `;
-            
-            adminBannersList.appendChild(bannerElement);
-            
-            bannerElement.querySelector('.delete-btn').addEventListener('click', (e) => {
-                const bannerId = e.target.dataset.id;
-                deleteBanner(bannerId);
-            });
-            
-            bannerElement.querySelector('.edit-btn').addEventListener('click', (e) => {
-                const bannerId = e.target.dataset.id;
-                startEditBanner(bannerId);
-            });
-        }
-        
-        function validateBannerImageUrl() {
-            const url = bannerImageUrl.value.trim();
-            
-            if (url === '') {
-                bannerUrlStatus.textContent = '';
-                bannerUrlStatus.className = 'url-status';
-                bannerImagePreview.style.display = 'none';
-                return;
-            }
-            
-            try {
-                new URL(url);
-                
-                const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
-                const isImageUrl = imageExtensions.some(ext => url.toLowerCase().endsWith(ext));
-                
-                if (isImageUrl) {
-                    bannerUrlStatus.textContent = 'URL válida';
-                    bannerUrlStatus.className = 'url-status valid-url';
-                    
-                    bannerImagePreview.src = url;
-                    bannerImagePreview.style.display = 'block';
-                    bannerImagePreview.onerror = () => {
-                        bannerUrlStatus.textContent = 'La URL es válida pero la imagen no se puede cargar';
-                        bannerUrlStatus.className = 'url-status invalid-url';
-                        bannerImagePreview.style.display = 'none';
-                    };
-                } else {
-                    bannerUrlStatus.textContent = 'La URL no parece ser una imagen (debe terminar en .jpg, .png, etc.)';
-                    bannerUrlStatus.className = 'url-status invalid-url';
-                    bannerImagePreview.style.display = 'none';
+        // Efecto de aparición para las tarjetas
+        const cards = document.querySelectorAll('.card, .plan-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
                 }
-            } catch (e) {
-                bannerUrlStatus.textContent = 'URL no válida';
-                bannerUrlStatus.className = 'url-status invalid-url';
-                bannerImagePreview.style.display = 'none';
-            }
-        }
-        
-        function addBanner() {
-            const image = bannerImageUrl.value.trim();
-            const link = bannerLinkInput.value.trim();
-            const active = bannerActiveSelect.value === 'true';
-            
-            if (!image) {
-                alert('La URL de la imagen es requerida');
-                return;
-            }
-            
-            db.collection("banners").add({
-                image,
-                link: link || null,
-                active,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert('Banner agregado con éxito');
-                resetBannerForm();
-                loadBanners();
-            })
-            .catch(error => {
-                console.error("Error al agregar banner:", error);
-                alert('Error al agregar banner');
             });
-        }
+        }, { threshold: 0.1 });
         
-        function startEditBanner(bannerId) {
-            const banner = banners.find(b => b.id === bannerId);
-            
-            if (banner) {
-                bannerImageUrl.value = banner.image;
-                bannerLinkInput.value = banner.link || '';
-                bannerActiveSelect.value = banner.active ? 'true' : 'false';
-                
-                validateBannerImageUrl();
-                
-                editingBannerId.value = bannerId;
-                bannerFormTitle.textContent = 'Editar Banner';
-                addBannerBtn.style.display = 'none';
-                updateBannerBtn.style.display = 'block';
-                cancelBannerEditBtn.style.display = 'block';
-                
-                document.querySelector('.admin-form').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert('Banner no encontrado');
-            }
-        }
-        
-        function updateBanner() {
-            const bannerId = editingBannerId.value;
-            if (!bannerId) return;
-            
-            const image = bannerImageUrl.value.trim();
-            const link = bannerLinkInput.value.trim();
-            const active = bannerActiveSelect.value === 'true';
-            
-            if (!image) {
-                alert('La URL de la imagen es requerida');
-                return;
-            }
-            
-            db.collection("banners").doc(bannerId).update({
-                image,
-                link: link || null,
-                active,
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert('Banner actualizado con éxito');
-                resetBannerForm();
-                loadBanners();
-            })
-            .catch(error => {
-                console.error("Error al actualizar banner:", error);
-                alert('Error al actualizar banner');
-            });
-        }
-        
-        function deleteBanner(bannerId) {
-            if (confirm('¿Estás seguro de eliminar este banner?')) {
-                db.collection("banners").doc(bannerId).delete()
-                    .then(() => {
-                        loadBanners();
-                    })
-                    .catch(error => {
-                        console.error("Error al eliminar banner:", error);
-                        alert('Error al eliminar banner');
-                    });
-            }
-        }
-        
-        function cancelBannerEdit() {
-            resetBannerForm();
-        }
-        
-        function resetBannerForm() {
-            bannerImageUrl.value = '';
-            bannerLinkInput.value = '';
-            bannerActiveSelect.value = 'true';
-            bannerUrlStatus.textContent = '';
-            bannerUrlStatus.className = 'url-status';
-            bannerImagePreview.style.display = 'none';
-            editingBannerId.value = '';
-            
-            bannerFormTitle.textContent = 'Agregar Nuevo Banner';
-            addBannerBtn.style.display = 'block';
-            updateBannerBtn.style.display = 'none';
-            cancelBannerEditBtn.style.display = 'none';
-        }
-        
-        function searchBanners() {
-            const searchTerm = searchBannersInput.value.toLowerCase();
-            
-            if (searchTerm === '') {
-                loadBanners();
-                return;
-            }
-            
-            const filteredBanners = banners.filter(banner => 
-                banner.image.toLowerCase().includes(searchTerm) || 
-                (banner.link && banner.link.toLowerCase().includes(searchTerm))
-            );
-            
-            adminBannersList.innerHTML = '';
-            
-            if (filteredBanners.length === 0) {
-                adminBannersList.innerHTML = '<div class="empty">No se encontraron banners</div>';
-                return;
-            }
-            
-            filteredBanners.forEach(banner => {
-                addBannerToAdminList(banner);
-            });
-        }
-        
-        function loadCategories() {
-            return db.collection("categories").orderBy("name").get()
-                .then(querySnapshot => {
-                    categories = [];
-                    productCategorySelect.innerHTML = '<option value="">Seleccione una categoría</option>';
-                    
-                    querySnapshot.forEach(doc => {
-                        const category = { id: doc.id, ...doc.data() };
-                        categories.push(category);
-                        
-                        const option = document.createElement('option');
-                        option.value = category.id;
-                        option.textContent = category.name;
-                        productCategorySelect.appendChild(option);
-                    });
-                    
-                    loadCategoriesList();
-                    
-                    return categories;
-                })
-                .catch(error => {
-                    console.error("Error al cargar categorías:", error);
-                    adminCategoriesList.innerHTML = '<div class="error">Error al cargar categorías</div>';
-                    return [];
-                });
-        }
-        
-        function loadCategoriesList() {
-            adminCategoriesList.innerHTML = '<div class="loading">Cargando categorías...</div>';
-            
-            if (categories.length === 0) {
-                adminCategoriesList.innerHTML = '<div class="empty">No hay categorías</div>';
-                return;
-            }
-            
-            adminCategoriesList.innerHTML = '';
-            
-            categories.forEach(category => {
-                const categoryElement = document.createElement('div');
-                categoryElement.className = 'category-item';
-                categoryElement.dataset.id = category.id;
-                
-                categoryElement.innerHTML = `
-                    <div class="category-info">
-                        <h3>${category.name}</h3>
-                        <p>Ícono: <i class="fas ${category.icon || 'fa-tag'}"></i> ${category.icon || 'Ninguno'}</p>
-                        ${category.image ? `<img src="${category.image}" alt="${category.name}" style="max-width: 100px; max-height: 100px; margin-top: 10px;">` : ''}
-                    </div>
-                    <div class="category-actions">
-                        <button class="edit-btn" data-id="${category.id}">Editar</button>
-                        <button class="delete-btn" data-id="${category.id}">Eliminar</button>
-                    </div>
-                `;
-                
-                adminCategoriesList.appendChild(categoryElement);
-                
-                categoryElement.querySelector('.delete-btn').addEventListener('click', (e) => {
-                    const categoryId = e.target.dataset.id;
-                    deleteCategory(categoryId);
-                });
-                
-                categoryElement.querySelector('.edit-btn').addEventListener('click', (e) => {
-                    const categoryId = e.target.dataset.id;
-                    startEditCategory(categoryId);
-                });
-            });
-        }
-        
-        function validateCategoryImageUrl() {
-            const url = categoryImageUrl.value.trim();
-            
-            if (url === '') {
-                categoryUrlStatus.textContent = '';
-                categoryUrlStatus.className = 'url-status';
-                categoryImagePreview.style.display = 'none';
-                return;
-            }
-            
-            try {
-                new URL(url);
-                
-                const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
-                const isImageUrl = imageExtensions.some(ext => url.toLowerCase().endsWith(ext));
-                
-                if (isImageUrl) {
-                    categoryUrlStatus.textContent = 'URL válida';
-                    categoryUrlStatus.className = 'url-status valid-url';
-                    
-                    categoryImagePreview.src = url;
-                    categoryImagePreview.style.display = 'block';
-                    categoryImagePreview.onerror = () => {
-                        categoryUrlStatus.textContent = 'La URL es válida pero la imagen no se puede cargar';
-                        categoryUrlStatus.className = 'url-status invalid-url';
-                        categoryImagePreview.style.display = 'none';
-                    };
-                } else {
-                    categoryUrlStatus.textContent = 'La URL no parece ser una imagen (debe terminar en .jpg, .png, etc.)';
-                    categoryUrlStatus.className = 'url-status invalid-url';
-                    categoryImagePreview.style.display = 'none';
-                }
-            } catch (e) {
-                categoryUrlStatus.textContent = 'URL no válida';
-                categoryUrlStatus.className = 'url-status invalid-url';
-                categoryImagePreview.style.display = 'none';
-            }
-        }
-        
-        function addCategory() {
-            const name = categoryNameInput.value.trim();
-            const icon = categoryIconInput.value.trim();
-            const image = categoryImageUrl.value.trim();
-            
-            if (!name) {
-                alert('El nombre de la categoría es requerido');
-                return;
-            }
-            
-            const categoryExists = categories.some(cat => cat.name.toLowerCase() === name.toLowerCase());
-            if (categoryExists) {
-                alert('Ya existe una categoría con ese nombre');
-                return;
-            }
-            
-            db.collection("categories").add({
-                name,
-                icon: icon || null,
-                image: image || null,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert('Categoría agregada con éxito');
-                resetCategoryForm();
-                loadCategories();
-            })
-            .catch(error => {
-                console.error("Error al agregar categoría:", error);
-                alert('Error al agregar categoría');
-            });
-        }
-        
-        function startEditCategory(categoryId) {
-            const category = categories.find(cat => cat.id === categoryId);
-            
-            if (category) {
-                categoryNameInput.value = category.name;
-                categoryIconInput.value = category.icon || '';
-                categoryImageUrl.value = category.image || '';
-                
-                validateCategoryImageUrl();
-                
-                editingCategoryId.value = categoryId;
-                categoryFormTitle.textContent = 'Editar Categoría';
-                addCategoryBtn.style.display = 'none';
-                updateCategoryBtn.style.display = 'block';
-                cancelCategoryEditBtn.style.display = 'block';
-                
-                document.querySelector('.admin-form').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert('Categoría no encontrada');
-            }
-        }
-        
-        function updateCategory() {
-            const categoryId = editingCategoryId.value;
-            if (!categoryId) return;
-            
-            const name = categoryNameInput.value.trim();
-            const icon = categoryIconInput.value.trim();
-            const image = categoryImageUrl.value.trim();
-            
-            if (!name) {
-                alert('El nombre de la categoría es requerido');
-                return;
-            }
-            
-            const nameExists = categories.some(cat => 
-                cat.id !== categoryId && cat.name.toLowerCase() === name.toLowerCase()
-            );
-            
-            if (nameExists) {
-                alert('Ya existe otra categoría con ese nombre');
-                return;
-            }
-            
-            db.collection("categories").doc(categoryId).update({
-                name,
-                icon: icon || null,
-                image: image || null,
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert('Categoría actualizada con éxito');
-                resetCategoryForm();
-                loadCategories();
-            })
-            .catch(error => {
-                console.error("Error al actualizar categoría:", error);
-                alert('Error al actualizar categoría');
-            });
-        }
-        
-        function deleteCategory(categoryId) {
-            if (confirm('¿Estás seguro de eliminar esta categoría? Los productos asociados no se eliminarán, pero quedarán sin categoría.')) {
-                db.collection("categories").doc(categoryId).delete()
-                    .then(() => {
-                        loadCategories();
-                    })
-                    .catch(error => {
-                        console.error("Error al eliminar categoría:", error);
-                        alert('Error al eliminar categoría');
-                    });
-            }
-        }
-        
-        function cancelCategoryEdit() {
-            resetCategoryForm();
-        }
-        
-        function resetCategoryForm() {
-            categoryNameInput.value = '';
-            categoryIconInput.value = '';
-            categoryImageUrl.value = '';
-            categoryUrlStatus.textContent = '';
-            categoryUrlStatus.className = 'url-status';
-            categoryImagePreview.style.display = 'none';
-            editingCategoryId.value = '';
-            
-            categoryFormTitle.textContent = 'Agregar Nueva Categoría';
-            addCategoryBtn.style.display = 'block';
-            updateCategoryBtn.style.display = 'none';
-            cancelCategoryEditBtn.style.display = 'none';
-        }
-        
-        function searchCategories() {
-            const searchTerm = searchCategoriesInput.value.toLowerCase();
-            
-            if (searchTerm === '') {
-                loadCategoriesList();
-                return;
-            }
-        
-            const filteredCategories = categories.filter(category => 
-                category.name.toLowerCase().includes(searchTerm) || 
-                (category.icon && category.icon.toLowerCase().includes(searchTerm))
-            );
-            
-            adminCategoriesList.innerHTML = '';
-            
-            if (filteredCategories.length === 0) {
-                adminCategoriesList.innerHTML = '<div class="empty">No se encontraron categorías</div>';
-                return;
-            }
-            
-            filteredCategories.forEach(category => {
-                const categoryElement = document.createElement('div');
-                categoryElement.className = 'category-item';
-                categoryElement.dataset.id = category.id;
-                
-                categoryElement.innerHTML = `
-                    <div class="category-info">
-                        <h3>${category.name}</h3>
-                        <p>Ícono: <i class="fas ${category.icon || 'fa-tag'}"></i> ${category.icon || 'Ninguno'}</p>
-                        ${category.image ? `<img src="${category.image}" alt="${category.name}" style="max-width: 100px; max-height: 100px; margin-top: 10px;">` : ''}
-                    </div>
-                    <div class="category-actions">
-                        <button class="edit-btn" data-id="${category.id}">Editar</button>
-                        <button class="delete-btn" data-id="${category.id}">Eliminar</button>
-                    </div>
-                `;
-                
-                adminCategoriesList.appendChild(categoryElement);
-                
-                categoryElement.querySelector('.delete-btn').addEventListener('click', (e) => {
-                    const categoryId = e.target.dataset.id;
-                    deleteCategory(categoryId);
-                });
-                
-                categoryElement.querySelector('.edit-btn').addEventListener('click', (e) => {
-                    const categoryId = e.target.dataset.id;
-                    startEditCategory(categoryId);
-                });
-            });
-        }
-        
-        function validateImageUrl() {
-            const url = productImageUrl.value.trim();
-            
-            if (url === '') {
-                urlStatus.textContent = '';
-                urlStatus.className = 'url-status';
-                imagePreview.style.display = 'none';
-                return;
-            }
-            
-            try {
-                new URL(url);
-                
-                const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
-                const isImageUrl = imageExtensions.some(ext => url.toLowerCase().endsWith(ext));
-                
-                if (isImageUrl) {
-                    urlStatus.textContent = 'URL válida';
-                    urlStatus.className = 'url-status valid-url';
-                    
-                    imagePreview.src = url;
-                    imagePreview.style.display = 'block';
-                    imagePreview.onerror = () => {
-                        urlStatus.textContent = 'La URL es válida pero la imagen no se puede cargar';
-                        urlStatus.className = 'url-status invalid-url';
-                        imagePreview.style.display = 'none';
-                    };
-                } else {
-                    urlStatus.textContent = 'La URL no parece ser una imagen (debe terminar en .jpg, .png, etc.)';
-                    urlStatus.className = 'url-status invalid-url';
-                    imagePreview.style.display = 'none';
-                }
-            } catch (e) {
-                urlStatus.textContent = 'URL no válida';
-                urlStatus.className = 'url-status invalid-url';
-                imagePreview.style.display = 'none';
-            }
-        }
-        
-        function loadProducts() {
-            adminProductsList.innerHTML = '<div class="loading">Cargando productos...</div>';
-        
-            db.collection("products").orderBy("createdAt", "desc").get()
-                .then(querySnapshot => {
-                    adminProductsList.innerHTML = '';
-        
-                    if (querySnapshot.empty) {
-                        adminProductsList.innerHTML = '<div class="empty">No hay productos</div>';
-                        return;
-                    }
-        
-                    querySnapshot.forEach(doc => {
-                        const product = { id: doc.id, ...doc.data() };
-                        addProductToAdminList(product);
-                    });
-                })
-                .catch(error => {
-                    console.error("Error al cargar productos:", error);
-                    adminProductsList.innerHTML = '<div class="error">Error al cargar productos</div>';
-                });
-        }
-        
-        function addProductToAdminList(product) {
-            const productElement = document.createElement('div');
-            productElement.className = 'product-item';
-            productElement.dataset.id = product.id;
-        
-            const category = categories.find(cat => cat.id === product.category);
-            const categoryName = category ? category.name : 'Sin categoría';
-            
-            const whatsappInfo = product.whatsapp ? `
-                <p>Contactar vendedor: 
-                    <a href="https://wa.me/53${product.whatsapp}" target="_blank" class="whatsapp-link">
-                        <i class="fab fa-whatsapp"></i> +53${product.whatsapp}
-                    </a>
-                </p>
-            ` : '';
-            
-            let sizesInfo = '';
-            if (product.sizes && product.sizes.length > 0) {
-                sizesInfo = '<p>Tallas/Modelos: ' + product.sizes.map(size => 
-                    `${size.name} (${size.stock})`
-                ).join(', ') + '</p>';
-            }
-        
-            productElement.innerHTML = `
-                <div class="product-info">
-                    <h3>${product.name}</h3>
-                    <p>${product.brand || 'Sin marca'} - CUP ${product.price.toFixed(2)}</p>
-                    <p>Stock: ${product.stock || 0} | Categoría: ${categoryName}</p>
-                    <p>Ubicación: ${product.province || 'Todas las provincias'}</p>
-                    ${sizesInfo}
-                    ${whatsappInfo}
-                    ${product.image ? `<img src="${product.image}" alt="${product.name}" style="max-width: 100px; max-height: 100px; margin-top: 10px;">` : ''}
-                </div>
-                <div class="product-actions">
-                    <button class="edit-btn" data-id="${product.id}">Editar</button>
-                    <button class="delete-btn" data-id="${product.id}">Eliminar</button>
-                </div>
-            `;
-        
-            adminProductsList.appendChild(productElement);
-        
-            productElement.querySelector('.delete-btn').addEventListener('click', (e) => {
-                const productId = e.target.dataset.id;
-                deleteProduct(productId);
-            });
-        
-            productElement.querySelector('.edit-btn').addEventListener('click', (e) => {
-                const productId = e.target.dataset.id;
-                startEditProduct(productId);
-            });
-        }
-        
-        function addProduct() {
-            const name = document.getElementById('product-name').value;
-            const brand = document.getElementById('product-brand').value;
-            const description = document.getElementById('product-description').value;
-            const price = parseFloat(document.getElementById('product-price').value);
-            const oldPrice = parseFloat(document.getElementById('product-old-price').value) || null;
-            const category = document.getElementById('product-category').value;
-            const province = document.getElementById('product-province').value;
-            const image = productImageUrl.value.trim();
-            const stock = parseInt(document.getElementById('product-stock').value) || 0;
-            const whatsapp = productWhatsappInput.value.trim();
-            const sizes = getSizesData();
-            
-            if (whatsapp && whatsappStatus.classList.contains('invalid-whatsapp')) {
-                alert('Por favor ingrese un número de WhatsApp válido');
-                return;
-            }
-        
-            if (!name || !price) {
-                alert('Nombre y precio son requeridos');
-                return;
-            }
-        
-            if (!image) {
-                urlStatus.textContent = 'Por favor ingresa una URL de imagen válida';
-                urlStatus.className = 'url-status invalid-url';
-                return;
-            }
-        
-            const features = description.split('\n').filter(line => line.trim() !== '');
-        
-            db.collection("products").add({
-                name,
-                brand,
-                description: features.join(', '),
-                price,
-                oldPrice,
-                category,
-                province,
-                image,
-                stock,
-                sizes: sizes.length > 0 ? sizes : null,
-                whatsapp: whatsapp || null,
-                features,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert('Producto agregado con éxito');
-                resetForm();
-                loadProducts();
-            })
-            .catch(error => {
-                console.error("Error al agregar producto:", error);
-                alert('Error al agregar producto');
-            });
-        }
-        
-        function startEditProduct(productId) {
-            db.collection("products").doc(productId).get()
-                .then(doc => {
-                    if (doc.exists) {
-                        const product = doc.data();
-                        
-                        document.getElementById('product-name').value = product.name;
-                        document.getElementById('product-brand').value = product.brand || '';
-                        document.getElementById('product-description').value = product.features?.join('\n') || product.description || '';
-                        document.getElementById('product-price').value = product.price;
-                        document.getElementById('product-old-price').value = product.oldPrice || '';
-                        document.getElementById('product-category').value = product.category || '';
-                        document.getElementById('product-province').value = product.province || 'Ciego de Ávila';
-                        document.getElementById('product-stock').value = product.stock || 1;
-                        productImageUrl.value = product.image || '';
-                        productWhatsappInput.value = product.whatsapp || '';
-                        
-                        sizesContainer.innerHTML = '';
-                        if (product.sizes && product.sizes.length > 0) {
-                            product.sizes.forEach(size => {
-                                addSizeField(size.name, size.stock);
-                            });
-                        }
-                        
-                        validateImageUrl();
-                        validateWhatsappNumber();
-                        
-                        editingProductId.value = productId;
-                        formTitle.textContent = 'Editar Producto';
-                        addProductBtn.style.display = 'none';
-                        updateProductBtn.style.display = 'block';
-                        cancelEditBtn.style.display = 'block';
-                        
-                        document.querySelector('.admin-form').scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        alert('Producto no encontrado');
-                    }
-                })
-                .catch(error => {
-                    console.error("Error al obtener producto:", error);
-                    alert('Error al cargar producto para edición');
-                });
-        }
-        
-        function updateProduct() {
-            const productId = editingProductId.value;
-            if (!productId) return;
-            
-            const name = document.getElementById('product-name').value;
-            const brand = document.getElementById('product-brand').value;
-            const description = document.getElementById('product-description').value;
-            const price = parseFloat(document.getElementById('product-price').value);
-            const oldPrice = parseFloat(document.getElementById('product-old-price').value) || null;
-            const category = document.getElementById('product-category').value;
-            const province = document.getElementById('product-province').value;
-            const image = productImageUrl.value.trim();
-            const stock = parseInt(document.getElementById('product-stock').value) || 0;
-            const whatsapp = productWhatsappInput.value.trim();
-            const sizes = getSizesData();
-            
-            if (whatsapp && whatsappStatus.classList.contains('invalid-whatsapp')) {
-                alert('Por favor ingrese un número de WhatsApp válido');
-                return;
-            }
-        
-            if (!name || !price) {
-                alert('Nombre y precio son requeridos');
-                return;
-            }
-        
-            if (!image) {
-                urlStatus.textContent = 'Por favor ingresa una URL de imagen válida';
-                urlStatus.className = 'url-status invalid-url';
-                return;
-            }
-        
-            const features = description.split('\n').filter(line => line.trim() !== '');
-        
-            db.collection("products").doc(productId).update({
-                name,
-                brand,
-                description: features.join(', '),
-                price,
-                oldPrice,
-                category,
-                province,
-                image,
-                stock,
-                sizes: sizes.length > 0 ? sizes : null,
-                whatsapp: whatsapp || null,
-                features,
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert('Producto actualizado con éxito');
-                resetForm();
-                loadProducts();
-            })
-            .catch(error => {
-                console.error("Error al actualizar producto:", error);
-                alert('Error al actualizar producto');
-            });
-        }
-        
-        function cancelEdit() {
-            resetForm();
-        }
-        
-        function resetForm() {
-            document.getElementById('product-name').value = '';
-            document.getElementById('product-brand').value = '';
-            document.getElementById('product-description').value = '';
-            document.getElementById('product-price').value = '';
-            document.getElementById('product-old-price').value = '';
-            document.getElementById('product-stock').value = '1';
-            document.getElementById('product-category').value = '';
-            document.getElementById('product-province').value = 'Ciego de Ávila';
-            productImageUrl.value = '';
-            productWhatsappInput.value = '';
-            urlStatus.textContent = '';
-            urlStatus.className = 'url-status';
-            whatsappStatus.textContent = '';
-            whatsappStatus.className = 'whatsapp-status';
-            imagePreview.style.display = 'none';
-            sizesContainer.innerHTML = '';
-            editingProductId.value = '';
-            
-            formTitle.textContent = 'Agregar Nuevo Producto';
-            addProductBtn.style.display = 'block';
-            updateProductBtn.style.display = 'none';
-            cancelEditBtn.style.display = 'none';
-        }
-        
-        function deleteProduct(productId) {
-            if (confirm('¿Estás seguro de eliminar este producto?')) {
-                db.collection("products").doc(productId).delete()
-                    .then(() => {
-                        loadProducts();
-                    })
-                    .catch(error => {
-                        console.error("Error al eliminar producto:", error);
-                        alert('Error al eliminar producto');
-                    });
-            }
-        }
-        
-        function searchProducts() {
-            const searchTerm = searchProductsInput.value.toLowerCase();
-            
-            if (searchTerm === '') {
-                loadProducts();
-                return;
-            }
-        
-            adminProductsList.innerHTML = '<div class="loading">Buscando productos...</div>';
-        
-            db.collection("products").orderBy("name").startAt(searchTerm).endAt(searchTerm + '\uf8ff').get()
-                .then(querySnapshot => {
-                    adminProductsList.innerHTML = '';
-        
-                    if (querySnapshot.empty) {
-                        adminProductsList.innerHTML = '<div class="empty">No se encontraron productos</div>';
-                        return;
-                    }
-        
-                    querySnapshot.forEach(doc => {
-                        const product = { id: doc.id, ...doc.data() };
-                        addProductToAdminList(product);
-                    });
-                })
-                .catch(error => {
-                    console.error("Error al buscar productos:", error);
-                    adminProductsList.innerHTML = '<div class="error">Error al buscar productos</div>';
-                });
-        }
+        cards.forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(card);
+        });
     </script>
 </body>
 </html>
